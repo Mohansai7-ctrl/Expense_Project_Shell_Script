@@ -42,12 +42,12 @@ VALIDATE(){
 
 
 
-echo "Your Script Executing time is $date" | tee -a $LOG_FILE
+echo "Your Script Executing time is $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
 dnf list installed mysql-server &>>$LOG_FILE
-if [ $? - ne 0 ]
+if [ $? -ne 0 ]
 then
     echo -e "$Y As mysql-server is not installed, now going to install it $N" | tee -a $LOG_FILE
     dnf install mysql-server -y
