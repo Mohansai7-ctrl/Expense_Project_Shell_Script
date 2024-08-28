@@ -20,12 +20,13 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
 
 
 CHECK_ROOT(){
-    if [ $userid -eq 0 ]
+    if [ $userid -ne 0 ]
     then
-        echo -e "$G Hurray!, you are having root access to run this script, Hence Proceeding further $N" &>>$LOG_FILE
-    else
         echo -e "$R You don't have root access to run this script, Please run this script by providing root or super user access $N" &>>$LOG_FILE
         exit 1
+    else
+        echo -e "$G Hurray!, you are having root access to run this script, Hence Proceeding further $N" &>>$LOG_FILE
+        
     fi
 
 }
@@ -39,9 +40,11 @@ VALIDATE(){
     fi
 }
 
-CHECK_ROOT
+
 
 echo "Your Script Executing time is $date" | tee -a $LOG_FILE
+
+CHECK_ROOT
 
 dnf list installed mysql-server &>>$LOG_FILE
 if [ $? - ne 0 ]
