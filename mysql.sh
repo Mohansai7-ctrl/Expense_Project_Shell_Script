@@ -12,10 +12,11 @@ Y="\e[33m"
 B="\e[34m"
 N="\e[0m"
 
-LOG_FOLDER="/var/log/expense-shell"
+LOGS_FOLDER="/var/log/expense"
+mkdir -p $LOGS_FOLDER
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
-LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
 
 
 CHECK_ROOT(){
