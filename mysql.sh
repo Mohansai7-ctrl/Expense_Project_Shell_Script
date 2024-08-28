@@ -80,7 +80,7 @@ mysql -h mysql.mohansai.online -u root -pExpenseApp@1 -e 'show databases;'
 if [ $? -ne 0 ]
 then
     echo -e "$R Password for db is not set, hence creating/setting it now $N" | tee -a $LOG_FILE
-    mysql -h mysql.mohansai.online --set-root-pass ExpenseApp@1
+    mysql_secure_installation --set-root-pass ExpenseApp@1
     VALIDATE $? "Setting the password is"
 else
     echo -e "Password is already created, hence $G SKIPPING $N" | tee -a $LOG_FILE
