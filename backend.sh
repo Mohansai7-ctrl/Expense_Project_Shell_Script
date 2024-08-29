@@ -60,8 +60,7 @@ VALIDATE $? "Installing the nodejs of version 20"
 
 
 
-echo "Installing the build tool - npm" | tee -a $LOG_FILE
-npm install &>>$LOG_FILE
+
 
 id expense
 if [ $? -ne 0 ]
@@ -98,6 +97,11 @@ rm -rf /app/*
 echo "removed existing files in the app directory"
 
 unzip /tmp/backend.zip | tee -a $LOG_FILE
+
+
+npm install &>>$LOG_FILE
+VALIDATE $? "Installation of build too -npm"
+
 
 cp /home/ec2-user/Expense_Project_Shell_Script/backend.service /etc/systemd/system/backend.service | tee -a $LOG_FILE
 echo "successfully copied the backend.service to systemed location"
