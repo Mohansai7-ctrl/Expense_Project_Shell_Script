@@ -56,7 +56,11 @@ then
     VALIDATE $? "Disabling the default nodejs is"
 
     dnf module enable nodejs:20 -y &>>LOG_FILE
-    VALIDATE $? "Enabling the nodejs of version 20
+    VALIDATE $? "Enabling the nodejs of version 20"
+
+    dnf install nodejs -y
+    VALIDATE $? "Installing the nodejs of version 20"
+
 else 
     echo -e "$G nodejs of required version is already installed, Hence proceeding further $N"
 fi
