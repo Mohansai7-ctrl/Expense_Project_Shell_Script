@@ -23,10 +23,10 @@ N="\e[0m"
 CHECK_ROOT(){
     if [ $userid -ne 0 ]
     then
-        echo -e "$R You don't have root access to run this script, Please run this script by providing root or super user access $N" &>>$LOG_FILE
+        echo -e "$R You don't have root access to run this script, Please run this script by providing root or super user access $N" 
         exit 1
     else
-        echo -e "$G Hurray!, you are having root access to run this script, Hence Proceeding further $N" &>>$LOG_FILE
+        echo -e "$G Hurray!, you are having root access to run this script, Hence Proceeding further $N" 
         
     fi
 
