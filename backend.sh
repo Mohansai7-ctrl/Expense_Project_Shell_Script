@@ -30,6 +30,7 @@ CHECK_ROOT(){
     if [ $userid -ne 0 ]
     then
         echo -e "$R You are not having root access, to proceed further pls run this script with root access $N" | tee -a $LOG_FILE
+        exit 1
     else
         echo -e "$G Hurray!, As you running this script with root access, proceeding further $N" | tee -a $LOG_FILE
     fi
