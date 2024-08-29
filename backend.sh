@@ -49,23 +49,16 @@ CHECK_ROOT
 
 echo -e "$Y Script Exectuing time is $(date) $N" | tee -a $LOG_FILE
 
-dnf list installed nodejs &>>$LOG_FILE
-if [ $? -ne 0 ]
-then
-    echo -e "$R As nodejs is not installed, now installing it $N" | tee -a $LOG_FILE
+dnf module disable nodejs -y &>>$LOG_FILE
+VALIDATE $? "Disabling the default nodejs is"
 
-    dnf module disable nodejs -y &>>$LOG_FILE
-    VALIDATE $? "Disabling the default nodejs is"
+dnf module enable nodejs:20 -y &>>$LOG_FILE
+VALIDATE $? "Enabling the nodejs of version 20"
 
-    dnf module enable nodejs:20 -y &>>$LOG_FILE
-    VALIDATE $? "Enabling the nodejs of version 20"
+dnf install nodejs -y
+VALIDATE $? "Installing the nodejs of version 20"
 
-    dnf install nodejs -y
-    VALIDATE $? "Installing the nodejs of version 20"
 
-else 
-    echo -e "$G nodejs of required version is already installed, Hence proceeding further $N"
-fi
 
 echo "Installing the build tool - npm" | tee -a $LOG_FILE
 npm install &>>$LOG_FILE
@@ -84,14 +77,15 @@ fi
 
 mkdir -p /app &>>$LOG_FILE
 
-cd /tmp/
+# cd /tmp/
 
-if [ -f backend.zip ]
-then
-rm -rf backend.zip
-else
-    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
-fi
+# if [ -f backend.zip ]
+# then
+# rm -rf backend.zip
+# else
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
+# fi
+
 
 cd /app
 
