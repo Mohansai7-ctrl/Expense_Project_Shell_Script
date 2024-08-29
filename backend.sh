@@ -85,8 +85,8 @@ fi
 mkdir -p /app &>>$LOG_FILE
 
 cd /tmp/
-pwd
-#rm -rf *
+
+rm -rf backend.zip
 
 # curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
 
