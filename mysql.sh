@@ -71,13 +71,13 @@ fi
 
 #Again checking the running status of mysqld service
 systemctl status mysqld
-if [ $? -eq 0 ]
-then
-    echo -e "$G Hurray! mysqld service is active and running, hence proceeding further to setup the password for database $N" | tee -a $LOG_FILE
-else
-    echo "Still mysqld is not running, need to check it" | tee -a $LOG_FILE
-    exit 1
-fi 
+# if [ $? -eq 0 ]
+# then
+#     echo -e "$G Hurray! mysqld service is active and running, hence proceeding further to setup the password for database $N" | tee -a $LOG_FILE
+# else
+#     echo "Still mysqld is not running, need to check it" | tee -a $LOG_FILE
+#     exit 1
+# fi 
 
 #Checking and setting the password of root user for the mysql db
 
