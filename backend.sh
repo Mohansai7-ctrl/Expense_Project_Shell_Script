@@ -86,31 +86,34 @@ mkdir -p /app &>>$LOG_FILE
 
 cd /tmp/
 
+if [ -f backend.zip ]
+then
 rm -rf backend.zip
+else
+    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
+fi
 
-# curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
+cd /app
 
-# cd /app
+rm -rf /app/*
+unzip /tmp/backend.zip | tee -a $LOG_FILE
 
-# rm -rf /app/*
-# unzip /tmp/backend.zip | tee -a $LOG_FILE
+cp /home/ec2-user/Expense_Project_Shell_Script /etc/systemd/system/backend.service | tee -a $LOG_FILE
 
-# cp /home/ec2-user/Expense_Project_Shell_Script /etc/systemd/system/backend.service | tee -a $LOG_FILE
+#now installing the mysql client to communicate with the mysql database
+dnf install mysql &>>$LOG_FILE
 
-# #now installing the mysql client to communicate with the mysql database
-# dnf install mysql &>>$LOG_FILE
+#loading the schema:
+mysql -h mysql.mohansai.online -u root -pExpenseApp@1 < /app/schema/backend.sql | tee -a $LOG_FILE
 
-# #loading the schema:
-# mysql -h mysql.mohansai.online -u root -pExpenseApp@1 < /app/schema/backend.sql | tee -a $LOG_FILE
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "Reloading the daemon service is"
 
-# systemctl daemon-reload &>>$LOG_FILE
-# VALIDATE $? "Reloading the daemon service is"
+systemctl enable backend &>>$LOG_FILE
+VALIDATE $? "Enabling the bakcend service is"
 
-# systemctl enable backend &>>$LOG_FILE
-# VALIDATE $? "Enabling the bakcend service is"
-
-# systemctl restart backend &>>$LOG_FILE
-# VALIDATE $? "Restarting the backend service is"
+systemctl restart backend &>>$LOG_FILE
+VALIDATE $? "Restarting the backend service is"
 
 
 
