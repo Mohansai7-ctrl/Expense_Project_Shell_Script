@@ -48,7 +48,7 @@ CHECK_ROOT
 
 echo -e "$Y Script Exectuing time is $(date) $N" | tee -a $LOG_FILE
 
-dnf module list installed nodejs &>>$LOG_FILE
+dnf list installed nodejs &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     echo -e "$R As nodejs is not installed, now installing it $N" | tee -a $LOG_FILE
@@ -100,7 +100,7 @@ VALIDATE $? "Reloading the daemon service is"
 systemctl enable backend &>>$LOG_FILE
 VALIDATE $? "Enabling the bakcend service is"
 
-systemctl restart backend | tee -a $LOG_FILE
+systemctl restart backend &>>$LOG_FILE
 VALIDATE $? "Restarting the backend service is"
 
 
