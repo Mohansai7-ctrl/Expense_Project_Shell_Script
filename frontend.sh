@@ -82,8 +82,7 @@ VALIDATE $? "Unzipping the code in /html directory is completed"
 
 #need to config the nginx service now by creating expense.conf in default.d in nginx directory.
 
-cp /home/ec2-user/Expense_Project_Shell_Script/expense.conf /etc/ngix/default.d/expense.conf
-echo "Copying of expense.conf is completed to nginx directory"
+cp /home/ec2-user/Expense_Project_Shell_Script/expense.conf /etc/nginx/default.d/expense.conf
 VALIDATE $? "Copying the expense.conf"
 
 systemctl restart nginx
