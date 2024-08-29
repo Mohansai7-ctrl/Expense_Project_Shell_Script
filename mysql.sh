@@ -4,13 +4,7 @@
 # #Creating mysql-server and enabling it.
 # Creating/Setting password to the created mysql-server database.
 
-userid=$(id -u)
 
-R="\e[31m"
-G="\e[32m"
-Y="\e[33m"
-B="\e[34m"
-N="\e[0m"
 
 LOGS_FOLDER="/var/log/expense"
 mkdir -p $LOGS_FOLDER
@@ -18,6 +12,13 @@ SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
 
+userid=$(id -u)
+
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+B="\e[34m"
+N="\e[0m"
 
 CHECK_ROOT(){
     if [ $userid -ne 0 ]
