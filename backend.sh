@@ -77,12 +77,16 @@ fi
 
 mkdir -p /app &>>$LOG_FILE
 
-cd /home/ec2-user/Expense_Project_Shell_Script /tmp/
+cd /tmp/
 
 if [ -f backend.zip ]
 then
-rm -rf backend.zip
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
+    rm -rf backend.zip
+    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
+    echo "removed existing backup file and then dowloaded again"
+else
+    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
+    echo "As existing one is not fetched, downloaded the code file in backend.zip by creating it"
 
 fi
 
@@ -92,7 +96,7 @@ cd /app
 rm -rf /app/*
 unzip /tmp/backend.zip | tee -a $LOG_FILE
 
-cp /home/ec2-user/Expense_Project_Shell_Script /etc/systemd/system/backend.service | tee -a $LOG_FILE
+cp /home/ec2-user/Expense_Project_Shell_Script/backend.service /etc/systemd/system/backend.service | tee -a $LOG_FILE
 
 #now installing the mysql client to communicate with the mysql database
 dnf install mysql &>>$LOG_FILE
