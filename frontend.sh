@@ -71,9 +71,12 @@ else
     echo "As frontend.zip file is not there, downloaded the code by creating it"
 fi
 
-cd /usr/share/nginx/html
+#cd /usr/share/nginx/html
 
-rm -rf /html/*
+rm -rf /usr/share/nginx/html/*
+cd /usr/share/nginx/html
+pwd
+
 unzip /tmp/frontend.zip
 VALIDATE $? "Unzipping the code in /html directory is completed"
 
