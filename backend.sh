@@ -24,7 +24,7 @@ LOGS_FOLDER="/var/log/expense"
 mkdir -p $LOGS_FOLDER
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
-$LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
 
 CHECK_ROOT(){
     if [ $userid -ne 0 ]
@@ -77,14 +77,14 @@ fi
 
 mkdir -p /app &>>$LOG_FILE
 
-# cd /tmp/
+cd /tmp/
 
-# if [ -f backend.zip ]
-# then
-# rm -rf backend.zip
-# else
+if [ -f backend.zip ]
+then
+rm -rf backend.zip
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
-# fi
+
+fi
 
 
 cd /app
