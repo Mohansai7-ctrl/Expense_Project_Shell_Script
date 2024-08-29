@@ -100,9 +100,11 @@ echo "removed existing files in the app directory"
 unzip /tmp/backend.zip | tee -a $LOG_FILE
 
 cp /home/ec2-user/Expense_Project_Shell_Script/backend.service /etc/systemd/system/backend.service | tee -a $LOG_FILE
+echo "successfully copied the backend.service to systemed location"
 
 #now installing the mysql client to communicate with the mysql database
-dnf install mysql &>>$LOG_FILE
+dnf install mysql -y &>>$LOG_FILE
+VALIDATE $? "Installing the mysql client is"
 
 #loading the schema:
 mysql -h mysql.mohansai.online -u root -pExpenseApp@1 < /app/schema/backend.sql | tee -a $LOG_FILE
