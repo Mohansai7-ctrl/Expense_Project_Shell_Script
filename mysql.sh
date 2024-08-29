@@ -23,10 +23,10 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
 CHECK_ROOT(){
     if [ $userid -ne 0 ]
     then
-        echo -e "$R You don't have root access to run this script, Please run this script by providing root or super user access $N" 
+        echo -e "$R You don't have root access to run this script, Please run this script by providing root or super user access $N" | tee -a $LOG_FILE
         exit 1
     else
-        echo -e "$G Hurray!, you are having root access to run this script, Hence Proceeding further $N" 
+        echo -e "$G Hurray!, you are having root access to run this script, Hence Proceeding further $N" | tee -a $LOG_FILE
         
     fi
 
