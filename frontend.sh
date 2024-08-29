@@ -46,7 +46,7 @@ dnf list installed nginx
 if [ $? -ne 0 ]
 then   
     echo "As nginx service is not installed, not going to install it"
-    dnf install nginx
+    dnf install nginx -y
     VALIDATE $? "nginx service"
 else
     echo "nginx is already installed, hence proceeding further"
@@ -79,7 +79,8 @@ echo "Unzipping the code in /html directory is completed"
 #need to config the nginx service now by creating expense.conf in default.d in nginx directory.
 
 cp /home/ec2-user/Expense_Project_Shell_Script/expense.conf /etc/ngix/default.d/expense.conf
-echo "Copying of expense.conf is completed to nginx directory
+echo "Copying of expense.conf is completed to nginx directory"
+VALIDATE $? "Copying the expense.conf"
 
 systemctl restart nginx
 VALIDATE $? "Restarting the nginx service"
