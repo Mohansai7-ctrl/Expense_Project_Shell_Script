@@ -53,6 +53,7 @@ dnf list installed nodejs &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     echo -e "$R As nodejs is not installed, now installing it $N" | tee -a $LOG_FILE
+    
     dnf module disable nodejs -y &>>$LOG_FILE
     VALIDATE $? "Disabling the default nodejs is"
 
@@ -83,6 +84,7 @@ fi
 
 mkdir -p /app &>>$LOG_FILE
 
+cd /tmp/backend.zip
 pwd
 
 # curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip | tee -a $LOG_FILE
