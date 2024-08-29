@@ -75,7 +75,7 @@ cd /usr/share/nginx/html
 
 rm -rf /html/*
 unzip /tmp/frontend.zip
-echo "Unzipping the code in /html directory is completed"
+VALIDATE $? "Unzipping the code in /html directory is completed"
 
 #need to config the nginx service now by creating expense.conf in default.d in nginx directory.
 
