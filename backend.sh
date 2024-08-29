@@ -12,7 +12,7 @@
 
 # finally reload, enable and restart the daemon backend service.
 
-userid=$date
-echo "$userid"
+userid=$(date)
+echo $userid
 
 
