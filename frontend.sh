@@ -58,12 +58,17 @@ VALIDATE $? "Enabling the nginx service"
 systemctl start nginx
 VALIDATE $? "Starting the nginx service"
 
-
+rm -rf /usr/share/nginx/html/*
 
 cd /tmp/
+
+
 if [ -f frontend.zip ]
 then
     echo "Removing it as it is existing and will downloade the code again newly"
+    rm -rf frontend.zip
+    echo $?
+    
     curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
     echo "Downloading the zipped file in tmp directory is completed"
 else
@@ -73,7 +78,7 @@ fi
 
 #cd /usr/share/nginx/html
 
-rm -rf /usr/share/nginx/html/*
+
 cd /usr/share/nginx/html
 pwd
 
