@@ -77,7 +77,7 @@ fi
 
 mkdir -p /app &>>$LOG_FILE
 
-cd /tmp/
+cd /home/ec2-user/Expense_Project_Shell_Script /tmp/
 
 if [ -f backend.zip ]
 then
