@@ -92,8 +92,11 @@ fi
 
 
 cd /app
+pwd
 
 rm -rf /app/*
+echo "removed existing files in the app directory"
+
 unzip /tmp/backend.zip | tee -a $LOG_FILE
 
 cp /home/ec2-user/Expense_Project_Shell_Script/backend.service /etc/systemd/system/backend.service | tee -a $LOG_FILE
